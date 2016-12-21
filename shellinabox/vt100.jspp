@@ -1056,6 +1056,11 @@ VT100.prototype.initializeElements = function(container) {
                    function(vt100) {
                      return function(e) {
                        if (!e) e = window.event;
+					   if (e.ctrlKey && e.keyCode == 86) {
+							return function() {
+								this.keysPressed();
+							};
+						}
                        return vt100.keyDown(e); } }(this));
   this.addListener(this.input, 'keypress',
                    function(vt100) {
@@ -2533,12 +2538,12 @@ VT100.prototype.showContextMenu = function(x, y) {
           '<li id="endconfig">' +
              (this.blinkingCursor ? '<img src="enabled.gif" />' : '') +
              'Blinking Cursor</li>'+
-          (this.usercss.firstChild ?
-           '<hr id="beginusercss" />' +
-           this.usercss.innerHTML +
-           '<hr id="endusercss" />' :
-           '<hr />') +
-          '<li id="about">About...</li>' +
+          //(this.usercss.firstChild ?
+           //'<hr id="beginusercss" />' +
+           //this.usercss.innerHTML +
+           //'<hr id="endusercss" />' :
+           //'<hr />') +
+          //'<li id="about">About...</li>' +
         '</ul>' +
       '</td></tr>' +
     '</table>';
